@@ -1,18 +1,16 @@
 import React from "react";
-
 import JobListing from "./JobListing";
-import { TbWashDryP } from "react-icons/tb";
 
 const JobListings = ({ isHome = false }) => {
   const [jobs, setJobs] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
+    const apiUrl = isHome ? "/api/jobs?_limit=3" : "/api/jobs";
     const fetchJobs = async () => {
       try{
-        const response = await fetch("http://localhost:5000/jobs");
+        const response = await fetch(apiUrl);
         const data = await response.json();
-        console.log(data);
         setJobs(data);
         setLoading(false);
         
@@ -23,7 +21,6 @@ const JobListings = ({ isHome = false }) => {
     fetchJobs();
   }, []);
 
-  const recentJobs = isHome ? jobs.slice(0, 3) : jobs;
   return (
     <>
       {/* <!-- Browse Jobs --> */}
@@ -33,7 +30,7 @@ const JobListings = ({ isHome = false }) => {
             {isHome ? "Recent Jobs" : "Browse Jobs"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {recentJobs.map((job, index) => (
+            {jobs.map((job, index) => (
               <JobListing key={job.id} job={job} />
             ))}
           </div>
