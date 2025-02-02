@@ -1,13 +1,37 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useParams, useLoaderData } from "react-router-dom";
+import { useParams, useLoaderData, useNavigate } from "react-router-dom";
 import GoBack from "../components/GoBack";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const SingleJob = () => {
-  
+const SingleJob = ({ deleteJob }) => {
+
+  const navigate = useNavigate();
+
+  const deleteClickJob = (jobId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        deleteJob(jobId);
+        toast.success("Job deleted successfully");
+        return navigate('/jobs');
+      }
+    });
+    
+    
+  }
+
   const job = useLoaderData();
+
   return (
     <>
       <GoBack />
@@ -71,7 +95,7 @@ const SingleJob = () => {
                 >
                   Edit Job
                 </Link>
-                <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
+                <button onClick={ () => deleteClickJob(job.id)} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
                   Delete Job
                 </button>
               </div>
