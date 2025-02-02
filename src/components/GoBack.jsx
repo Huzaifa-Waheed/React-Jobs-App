@@ -1,17 +1,17 @@
-import { FaArrowLeft } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import React from "react";
 
 const GoBack = () => {
   return (
     <section>
-      <div class="container m-auto py-6 px-6">
-        <NavLink
-          href="/jobs"
-          class="text-indigo-500 hover:text-indigo-600 flex items-center"
+      <div  className="container m-auto py-6 px-6">
+        <Link
+          to="/jobs"
+          className="text-indigo-500 hover:text-indigo-600 flex items-center"
         >
           <FaArrowLeft className="mr-2" /> Back to Job Listings
-        </NavLink>
+        </Link>
       </div>
     </section>
   );
