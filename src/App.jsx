@@ -12,6 +12,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import SingleJob, {jobLoader} from './pages/SingleJob';
 import AddJob from './pages/AddJob';
 import axios from 'axios';
+import EditJob from './pages/EditJob';
 
 
 
@@ -50,6 +51,18 @@ const App = () => {
 
   }
 
+  // Update Job Function
+  const updateJob = async (updatedJob) => {
+    try{
+      const response = await axios.put(`/api/jobs/${updatedJob.id}`, updatedJob);
+      if(response.status === 200 || response.ok){
+        return;
+      }
+    }catch(error){
+      console.log(error);
+    }
+  }
+
   // Router
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -57,11 +70,17 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path='/Jobs' element={<JobsPage />} />
           <Route path='/add-job' element={<AddJob addJobSubmit={addJob} />} />
+
           <Route 
             path='/Jobs/:id' 
             element={<SingleJob deleteJob={deleteJob} />}
             loader={jobLoader} 
           />  {/* (:id) Specify Dynamic Route */}
+
+          <Route path='/edit-job/:id'
+            element={<EditJob updateJob={updateJob} />}
+            loader={jobLoader}
+            />
 
           <Route path='*' element={<NotFoundPage />} /> {/* 404 page (* path work for that page which is not exist yet) */}
         </Route>
