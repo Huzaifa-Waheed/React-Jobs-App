@@ -2,12 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const AddJob = ({addJobSubmit}) => {
     const [type, setType] = useState('Full-Time');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [salary, setSalary] = useState('Under $50K');
+    const [salary, setSalary] = useState('Under PKR 100K');
     const [location, setLocation] = useState('');
     const [company, setCompany] = useState('');
     const [companyDescription, setCompanyDescription] = useState('');
@@ -111,17 +112,18 @@ const AddJob = ({addJobSubmit}) => {
                 value={salary}
                 onChange={(event) => setSalary(event.target.value)}
               >
-                <option value="Under $50K">Under $50K</option>
-                <option value="$50K - 60K">$50K - $60K</option>
-                <option value="$60K - 70K">$60K - $70K</option>
-                <option value="$70K - 80K">$70K - $80K</option>
-                <option value="$80K - 90K">$80K - $90K</option>
-                <option value="$90K - 100K">$90K - $100K</option>
-                <option value="$100K - 125K">$100K - $125K</option>
-                <option value="$125K - 150K">$125K - $150K</option>
-                <option value="$150K - 175K">$150K - $175K</option>
-                <option value="$175K - 200K">$175K - $200K</option>
-                <option value="Over $200K">Over $200K</option>
+                <option value="Under PKR 100K">Under PKR 100K</option>
+                <option value="PKR 100K - 150K">PKR 100K - 150K</option>
+                <option value="PKR 150K - 200K">PKR 150K - 200K</option>
+                <option value="PKR 200K - 250K">PKR 200K - 250K</option>
+                <option value="PKR 250K - 300K">PKR 250K - 300K</option>
+                <option value="PKR 300K - 350K">PKR 300K - 350K</option>
+                <option value="PKR 350K - 400K">PKR 350K - 400K</option>
+                <option value="PKR 400K - 500K">PKR 400K - 500K</option>
+                <option value="PKR 500K - 600K">PKR 500K - 600K</option>
+                <option value="PKR 600K - 750K">PKR 600K - 750K</option>
+                <option value="Over PKR 750K">Over PKR 750K</option>
+
               </select>
             </div>
 
@@ -213,11 +215,19 @@ const AddJob = ({addJobSubmit}) => {
 
             <div>
               <button
-                className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 mb-3 rounded-full w-full focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Add Job
               </button>
+            </div>
+
+            <div>
+                <Link to='/jobs'
+                className=" block text-center bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                >
+                    Cancel
+                </Link>
             </div>
           </form>
         </div>
